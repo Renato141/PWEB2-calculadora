@@ -85,7 +85,7 @@ document.addEventListener("keydown", (event) => {
 
     // Se a tecla pressionada estiver mapeada a um botão da calculadora, simule o clique no botão correspondente.
     if (key) {
-        // Se a tecla pressionada for Enter, dispare o evento de clique no botão "evaluate".
+        // Se a tecla pressionada for Enter, dispare o evento de clique no botão de "evaluate".
         if (key === "evaluate") {
             evaluate.click();
         }
