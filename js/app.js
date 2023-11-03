@@ -10,54 +10,6 @@ let porcent = document.querySelector('#porce');
 // Visor da calculadora.
 let realTimeScreenValue = [];
 
-// Adicionei um evento de escuta ao documento para capturar as teclas pressionadas
-document.addEventListener("keydown", (event) => {
- // Mapeie as teclas do teclado aos valores dos botões da calculadora
-    const keyMappings = {
-        "0": "0",
-        "1": "1",
-        "2": "2",
-        "3": "3",
-        "4": "4",
-        "5": "5",
-        "6": "6",
-        "7": "7",
-        "8": "8",
-        "9": "9",
-        "+": "+",
-        "-": "-",
-        "*": "*",
-        "/": "/",
-        ",": ".",
-        "Enter": "evaluate",  // Tecla Enter para avaliar a expressão
-        "Backspace": "erase"  // Tecla Backspace para apagar
-    };
-
-    // Obtenha o valor correspondente à tecla pressionada no mapa de teclas
-    const key = keyMappings[event.key];
-
-    // Se a tecla pressionada estiver mapeada a um botão da calculadora, simule o clique no botão correspondente
-    if (key) {
-        // Se a tecla pressionada for Enter, dispare o evento de clique no botão "evaluate"
-        if (key === "evaluate") {
-            evaluate.click();
-        }
-        // Se a tecla pressionada for Backspace, dispare o evento de clique no botão "erase"
-        else if (key === "erase") {
-            erasebtn.click();
-        }
-        // Encontre o botão correspondente ao valor da tecla pressionada
-        else {
-            // Se o botão foi encontrado, dispare o evento de clique no botão
-            const button = Array.from(buttons).find(btn => btn.value === key);
-            if (button) {
-                button.click();
-            }
-        }
-    }
-});
-
-
 // Limpar.
 clearbtn.addEventListener("click", () => {
     realTimeScreenValue = [''];
@@ -83,7 +35,6 @@ function updateScreen() {
         }
     }
 }
-
 
 // Função anexada a todos os botões.
 buttons.forEach((btn) => {
@@ -114,3 +65,49 @@ buttons.forEach((btn) => {
     });
 });
 
+
+// Adicione um evento de escuta ao documento para capturar as teclas pressionadas
+document.addEventListener("keydown", (event) => {
+    // Mapeie as teclas do teclado aos valores dos botões da calculadora
+    const keyMappings = {
+        "0": "0",
+        "1": "1",
+        "2": "2",
+        "3": "3",
+        "4": "4",
+        "5": "5",
+        "6": "6",
+        "7": "7",
+        "8": "8",
+        "9": "9",
+        "+": "+",
+        "-": "-",
+        "*": "*",
+        "/": "/",
+        "Enter": "evaluate",  // Tecla Enter para avaliar a expressão
+        "Backspace": "erase"  // Tecla Backspace para apagar
+    };
+
+    // Obtenha o valor correspondente à tecla pressionada no mapa de teclas
+    const key = keyMappings[event.key];
+
+    // Se a tecla pressionada estiver mapeada a um botão da calculadora, simule o clique no botão correspondente
+    if (key) {
+        // Se a tecla pressionada for Enter, dispare o evento de clique no botão "evaluate"
+        if (key === "evaluate") {
+            evaluate.click();
+        }
+        // Se a tecla pressionada for Backspace, dispare o evento de clique no botão "erase"
+        else if (key === "erase") {
+            erasebtn.click();
+        }
+        // Encontre o botão correspondente ao valor da tecla pressionada
+        else {
+            // Se o botão foi encontrado, dispare o evento de clique no botão
+            const button = Array.from(buttons).find(btn => btn.value === key);
+            if (button) {
+                button.click();
+            }
+        }
+    }
+});
