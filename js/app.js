@@ -30,8 +30,8 @@ function updateScreen() {
             // Tenta avaliar a expressão no visor usando a função eval e exibe o resultado em answerScreen.
             answerScreen.innerHTML = eval(realTimeScreenValue.join(''));
         } catch (error) {
-            // Se houver um erro ao avaliar a expressão, exibe uma string vazia no visor de resposta.
-            answerScreen.innerHTML = '';
+            // Se houver um erro ao avaliar a expressão, exibe uma mensagem de erro.
+            answerScreen.innerHTML = 'Erro de expressão';
         }
     }
 }
@@ -40,23 +40,15 @@ function updateScreen() {
 buttons.forEach((btn) => {
     btn.addEventListener("click", () => {
         if (btn.id === 'clear') {
-            // Se o botão "Limpar" for clicado, redefine o valor do visor para uma string vazia.
+            // Se o botão "clear" for clicado, redefine o valor do visor para uma string vazia.
             realTimeScreenValue = [''];
         } else if (btn.id === 'erase') {
-            // Se o botão "Apagar" for clicado, remove o último elemento do valor do visor.
+            // Se o botão "erase" for clicado, remove o último elemento do valor do visor.
             realTimeScreenValue.pop();
         } else if (btn.id === 'evaluate') {
-            // Se o botão "Avaliar" for clicado, defina o valor do visor como o resultado da expressão.
+            // Se o botão "evaluate" for clicado, defina o valor do visor como o resultado da expressão.
             realTimeScreenValue = [answerScreen.innerHTML];
-        } else if (btn.id === 'porce') {
-            // Se o botão de porcentagem for clicado
-            // Obter o valor atual na tela e converter para um número, ou 0 se não for um número válido.
-            let currentValue = parseFloat(realTimeScreenValue.join('')) || 0;
-            // Calcular a porcentagem dividindo o valor atual por 100.
-            let percentage = currentValue / 100;
-            // Atualizar o valor no visor com a porcentagem calculada, convertendo-a de volta para uma string.
-            realTimeScreenValue = [percentage.toString()];
-        } else {
+        }else {
             // Se qualquer outro botão for clicado, adicione o valor do botão ao valor do visor.
             realTimeScreenValue.push(btn.value);
         }
@@ -65,10 +57,10 @@ buttons.forEach((btn) => {
     });
 });
 
-
-// Adicione um evento de escuta ao documento para capturar as teclas pressionadas
+// O usuário pode utiizar o mouse ou teclado para utilizar a calculadora.
+// Adicionei um evento de escuta ao documento para capturar as teclas pressionadas pelo usuário.
 document.addEventListener("keydown", (event) => {
-    // Mapeie as teclas do teclado aos valores dos botões da calculadora
+    // Mapeie as teclas do teclado aos valores dos botões da calculadora.
     const keyMappings = {
         "0": "0",
         "1": "1",
@@ -84,26 +76,27 @@ document.addEventListener("keydown", (event) => {
         "-": "-",
         "*": "*",
         "/": "/",
-        "Enter": "evaluate",  // Tecla Enter para avaliar a expressão
-        "Backspace": "erase"  // Tecla Backspace para apagar
+        ",": ".",
+        "Enter": "evaluate",  // Tecla Enter para avaliar a expressão.
+        "Backspace": "erase"  // Tecla Backspace para apagar.
     };
 
-    // Obtenha o valor correspondente à tecla pressionada no mapa de teclas
+    // Obtenho o valor correspondente à tecla pressionada no mapa de teclas.
     const key = keyMappings[event.key];
 
-    // Se a tecla pressionada estiver mapeada a um botão da calculadora, simule o clique no botão correspondente
+    // Se a tecla pressionada estiver mapeada a um botão da calculadora, simule o clique no botão correspondente.
     if (key) {
-        // Se a tecla pressionada for Enter, dispare o evento de clique no botão "evaluate"
+        // Se a tecla pressionada for Enter, dispare o evento de clique no botão "evaluate".
         if (key === "evaluate") {
             evaluate.click();
         }
-        // Se a tecla pressionada for Backspace, dispare o evento de clique no botão "erase"
+        // Se a tecla pressionada for Backspace, dispare o evento de clique no botão "erase".
         else if (key === "erase") {
             erasebtn.click();
         }
-        // Encontre o botão correspondente ao valor da tecla pressionada
+        // Encontre o botão correspondente ao valor da tecla pressionada.
         else {
-            // Se o botão foi encontrado, dispare o evento de clique no botão
+            // Se o botão foi encontrado, dispare o evento de clique no botão.
             const button = Array.from(buttons).find(btn => btn.value === key);
             if (button) {
                 button.click();
