@@ -5,7 +5,6 @@ let buttons = document.querySelectorAll('button');
 let erasebtn = document.querySelector('#erase');
 let clearbtn = document.querySelector('#clear');
 let evaluate = document.querySelector('#evaluate');
-let porcent = document.querySelector('#porce');
 
 // Visor da calculadora.
 let realTimeScreenValue = [];
